@@ -1,7 +1,7 @@
 '''
 For this task we build a movie recommender
-The system will recommend top 4 movies based on their similarity
-The program returns the titles of top 4 movies
+The system will recommend top movie given the similarity
+We call this program: Hyperion Netflix!
 '''
 #import needed librari
 import spacy
@@ -27,40 +27,34 @@ to_compare = nlp(hulk)
 
 
 #defining a function to collect similarity score
+similarity_score = []
 def score_collector():
+    
     for movie in movie_list:
         similarity = nlp(movie).similarity(to_compare)
         similarity_score.append(similarity)
     
 
 #finding the top 4
-def get_top_4():
-    print("\nYou might like these 4 movies as well.")
+def get_top(to_be_compared):
+    score_collector()
+    print("\nYou might like this movie as well.")
     print("=========================")
     for movie in movie_list:
         
-        similarity = nlp(movie).similarity(to_compare)
+        similarity = nlp(movie).similarity(to_be_compared)
         movie_split = movie.split(":")
         movie_title = movie_split[0]
-        if similarity in top_4_score:
+        if similarity == max(similarity_score):
             print(movie_title + ":", similarity)
         else:
             pass
 
     print("\nThank you for using Hyperion Netflix!!\n")
 
+#Start of the program to get the top movie
+get_top(to_compare)
 
-
-#Start of the program
-
-#collect score
-similarity_score = []
-score_collector()
-
-#perform ranking
-top_4_score = sorted((similarity_score)[-4:],reverse=True)
-top_4_movie=[]
-get_top_4()
 
 
 
