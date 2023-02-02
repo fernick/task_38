@@ -1,6 +1,6 @@
-# Note - Version 2 - considers two
+# Note - Version 3 
 '''
-For this version, 2 correctionas were made
+For this version, 2 correction as were made
 * we take movie description as an argument
 * We also return one most similar movie
 
@@ -47,13 +47,13 @@ def score_collector():
     
 
 # finding the top 4
-def get_top(to_be_compared):
+def get_top(description):
     score_collector()
     print("\nYou might like this movie as well.")
     print("=========================")
     for movie in movie_list:
         
-        similarity = nlp(movie).similarity(to_be_compared)
+        similarity = nlp(movie).similarity(nlp(description))
         movie_split = movie.split(":")
         movie_title = movie_split[0]
         if similarity == max(similarity_score):
@@ -64,7 +64,7 @@ def get_top(to_be_compared):
     print("\nThank you for using Hyperion Netflix!!\n")
 
 # Start of the program to get the top movie
-get_top(to_compare)
+get_top(hulk)
 
 
 
